@@ -18,6 +18,10 @@ T useChangeNotifierListenableState<T extends ChangeNotifier>(T data) {
 
 //This is home page
 class HomeView extends HookWidget {
+  //Textfield controller for subject and note
+  final TextEditingController _subjectController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final searchChangeNotifier = useChangeNotifierListenableState(
@@ -26,24 +30,44 @@ class HomeView extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Training on how save on SQLite'),
+        title: const Text('Training on how save in SQLite'),
       ),
-      body: FutureBuilder(
-          future: useProvider(homeViewModelProvider).findAll(),
-          builder: (context, snapshot) {
-            //If has data, this text will show
-            if (snapshot.hasData) {
-              final List<Model> listData = snapshot.data as List<Model>;
-              return Text('Data insert count: ${listData.length}');
-            }
-            //If has no data, this text will show
-            return Text('Error');
-          }),
+      body: Column(
+        children: [
+          TextFormField(
+              controller: _subjectController,
+              decoration: InputDecoration(
+                hintText: 'Subject',
+              )),
+          TextFormField(
+              controller: _noteController,
+              decoration: InputDecoration(
+                hintText: 'Notes',
+              )),
+          FutureBuilder(
+              future: useProvider(homeViewModelProvider).findAll(),
+              builder: (context, snapshot) {
+                //If has data, this text will show
+                if (snapshot.hasData) {
+                  final List<Model> listData = snapshot.data as List<Model>;
+                  return Text(
+                    'Data insert count: ${listData.length}',
+                    style: TextStyle(fontSize: 24),
+                  );
+                }
+                //If has no data, this text will show
+                return Text('Error');
+              })
+        ],
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           // for every press, it save to the database
-          homeViewModel.createData();
+          homeViewModel.createData(
+              _subjectController.text, _noteController.text);
           searchChangeNotifier.reloadState();
+          _subjectController.text = "";
+          _noteController.text = "";
         },
         label: const Text('Add new data'),
         icon: const Icon(Icons.add),

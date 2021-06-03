@@ -43,9 +43,7 @@ class TableNote extends SqfEntityTableBase {
     ];
     super.init();
   }
-
   static SqfEntityTableBase? _instance;
-
   static SqfEntityTableBase get getInstance {
     return _instance = _instance ?? TableNote();
   }
@@ -65,9 +63,7 @@ class SequenceIdentitySequence extends SqfEntitySequenceBase {
     startWith = 0; /* optional. default is 0 */
     super.init();
   }
-
   static SequenceIdentitySequence? _instance;
-
   static SequenceIdentitySequence get getInstance {
     return _instance = _instance ?? SequenceIdentitySequence();
   }
@@ -91,7 +87,6 @@ class MyDbModel extends SqfEntityModelProvider {
     bundledDatabasePath = myDbModel
         .bundledDatabasePath; //'assets/sample.db'; // This value is optional. When bundledDatabasePath is empty then EntityBase creats a new database when initializing the database
   }
-
   Map<String, dynamic> getControllers() {
     final controllers = <String, dynamic>{};
 
@@ -106,16 +101,13 @@ class Note {
   Note({this.id, this.subject, this.notes, this.isActive, this.isDeleted}) {
     _setDefaultValues();
   }
-
   Note.withFields(this.subject, this.notes, this.isActive, this.isDeleted) {
     _setDefaultValues();
   }
-
   Note.withId(
       this.id, this.subject, this.notes, this.isActive, this.isDeleted) {
     _setDefaultValues();
   }
-
   // fromMap v2.0
   Note.fromMap(Map<String, dynamic> o, {bool setDefaultValues = true}) {
     if (setDefaultValues) {
@@ -136,7 +128,6 @@ class Note {
         ? o['isDeleted'] == 1 || o['isDeleted'] == true
         : null;
   }
-
   // FIELDS (Note)
   int? id;
   String? subject;
@@ -145,7 +136,6 @@ class Note {
   bool? isDeleted;
 
   BoolResult? saveResult;
-
   // end FIELDS (Note)
 
   static const bool _softDeleteActivated = true;
@@ -433,9 +423,9 @@ class Note {
     isActive = isActive ?? true;
     isDeleted = isDeleted ?? false;
   }
-// END METHODS
-// BEGIN CUSTOM CODE
-/*
+  // END METHODS
+  // BEGIN CUSTOM CODE
+  /*
       you can define customCode property of your SqfEntityTable constant. For example:
       const tablePerson = SqfEntityTable(
       tableName: 'person',
@@ -447,19 +437,18 @@ class Note {
       ],
       customCode: '''
        String fullName()
-       {
+       { 
          return '$firstName $lastName';
        }
       ''');
      */
-// END CUSTOM CODE
+  // END CUSTOM CODE
 }
 // endregion note
 
 // region NoteField
 class NoteField extends SearchCriteria {
   NoteField(this.noteFB);
-
   // { param = DbParameter(); }
   DbParameter param = DbParameter();
   String _waitingNot = '';
@@ -664,7 +653,6 @@ class NoteFilterBuilder extends SearchCriteria {
     _addedBlocks.waitingStartBlock!.add(false);
     _obj = obj;
   }
-
   AddedBlocks _addedBlocks = AddedBlocks(<bool>[], <bool>[]);
   int _blockIndex = 0;
   List<DbParameter> parameters = <DbParameter>[];
@@ -835,31 +823,26 @@ class NoteFilterBuilder extends SearchCriteria {
   }
 
   NoteField? _id;
-
   NoteField get id {
     return _id = setField(_id, 'id', DbType.integer);
   }
 
   NoteField? _subject;
-
   NoteField get subject {
     return _subject = setField(_subject, 'subject', DbType.text);
   }
 
   NoteField? _notes;
-
   NoteField get notes {
     return _notes = setField(_notes, 'notes', DbType.text);
   }
 
   NoteField? _isActive;
-
   NoteField get isActive {
     return _isActive = setField(_isActive, 'isActive', DbType.bool);
   }
 
   NoteField? _isDeleted;
-
   NoteField get isDeleted {
     return _isDeleted = setField(_isDeleted, 'isDeleted', DbType.bool);
   }
@@ -1176,34 +1159,29 @@ class NoteFilterBuilder extends SearchCriteria {
 // region NoteFields
 class NoteFields {
   static TableField? _fId;
-
   static TableField get id {
     return _fId = _fId ?? SqlSyntax.setField(_fId, 'id', DbType.integer);
   }
 
   static TableField? _fSubject;
-
   static TableField get subject {
     return _fSubject =
         _fSubject ?? SqlSyntax.setField(_fSubject, 'subject', DbType.text);
   }
 
   static TableField? _fNotes;
-
   static TableField get notes {
     return _fNotes =
         _fNotes ?? SqlSyntax.setField(_fNotes, 'notes', DbType.text);
   }
 
   static TableField? _fIsActive;
-
   static TableField get isActive {
     return _fIsActive =
         _fIsActive ?? SqlSyntax.setField(_fIsActive, 'isActive', DbType.bool);
   }
 
   static TableField? _fIsDeleted;
-
   static TableField get isDeleted {
     return _fIsDeleted = _fIsDeleted ??
         SqlSyntax.setField(_fIsDeleted, 'isDeleted', DbType.integer);

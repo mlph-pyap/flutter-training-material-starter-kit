@@ -1,6 +1,6 @@
 import 'package:hs_training/data/model/home/note_db_value_object.dart';
 import 'package:hs_training/data/model/model.dart';
-import 'package:hs_training/data/model/database.dart';
+import 'package:hs_training/data/database/database.dart';
 import 'package:hs_training/data/repository/repository.dart';
 
 class LaunchRepository extends HttpRepository {

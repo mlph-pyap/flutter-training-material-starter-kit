@@ -1,6 +1,5 @@
 import 'package:hs_training/data/model/model.dart';
 
-import '../database.dart';
 
 abstract class Repository <T extends Model>{
   Future<bool> create(final T model);
@@ -18,9 +17,4 @@ abstract class Repository <T extends Model>{
   Future<bool> delete(final String id);
 }
 
-abstract class HttpRepository<T> extends Repository {
-
-  //Future getDB() async {
-  //  return createDb();
-  //}
-}
+abstract class HttpRepository<T> extends Repository {}

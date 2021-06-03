@@ -17,9 +17,8 @@ class HomeViewModel extends StateNotifier<HomeRepository> {
   final HomeRepository launchRepository;
 
   //save the data using repository
-  Future<void> createData() async {
-    launchRepository
-        .create(NoteDbValueObject("save_subject", "save_note", true));
+  Future<void> createData(String subject, String note) async {
+    launchRepository.create(NoteDbValueObject(subject, note, true));
   }
 
   //Get the data on repository

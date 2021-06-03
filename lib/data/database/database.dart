@@ -1,23 +1,15 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:sqfentity/sqfentity.dart';
 import 'package:sqfentity_gen/sqfentity_gen.dart';
 
+import 'notes.dart';
+
 part 'database.g.dart';
 
 // Define the 'tableNote' constant as SqfEntityTable for the category table.
-const tableNote = SqfEntityTable(
-    tableName: 'note',
-    primaryKeyName: 'id',
-    primaryKeyType: PrimaryKeyType.integer_auto_incremental,
-    useSoftDeleting: true,
-    modelName: null,
-    fields: [
-      SqfEntityField('subject', DbType.text),
-      SqfEntityField('notes', DbType.text),
-      SqfEntityField('isActive', DbType.bool, defaultValue: true),
-    ]);
 
 const seqIdentity = SqfEntitySequence(
   sequenceName: 'identity',
@@ -30,11 +22,19 @@ const seqIdentity = SqfEntitySequence(
   // startWith = 0;   /* optional. default is 0 */
 );
 
+///
+const String SQLITE_DATABASE_NAME = "training_database";
+
+///
+const String SQLITE_DATABASE = "training_database.db";
+
 @SqfEntityBuilder(myDbModel)
+
+///
 const myDbModel = SqfEntityModel(
-    modelName: 'MyDbModel',
+    modelName: SQLITE_DATABASE_NAME,
     // optional
-    databaseName: 'sampleORM.db',
+    databaseName: SQLITE_DATABASE,
     password: null,
     // You can set a password if you want to use crypted database
 //(For more information: https://github.com/sqlcipher/sqlcipher)

@@ -29,7 +29,6 @@ dependencies:
   freezed: ^0.14.2
   freezed_annotation: ^0.14.2
   state_notifier: ^0.7.0
-  shared_preferences: ^2.0.6
   flutter_dotenv: ^5.0.0
   sqfentity: ^2.0.0
   sqfentity_gen: ^2.0.0
